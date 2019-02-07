@@ -10,14 +10,18 @@ class HomeComponent extends React.Component {
     this.state = {
       data: [],
       selectedPage: 1,
-      exchanges: []
+      exchanges: [],
+      exchangeCode: null
     };
   }
 
   fetchCompanies() {
     axios
       .get('https://api.renmark.ir/companies', {
-        params: { page: this.state.selectedPage }
+        params: {
+          page: this.state.selectedPage,
+          exchange: this.state.exchangeCode
+        }
       })
       .then(response => {
         const responseData = response.data ? response.data.data : [];
@@ -65,13 +69,26 @@ class HomeComponent extends React.Component {
     });
   };
 
+  handleFilterChange = exchangeCode => {
+    this.setState(
+      { exchangeCode: exchangeCode ? exchangeCode : null, selectedPage: 1 },
+      () => {
+        this.fetchCompanies();
+      }
+    );
+  };
+
   render() {
     return (
       <div className="container">
         <div className="row justify-content-center">
           <div className="form-group col-3">
             <label htmlFor="exampleFormControlSelect1">Choose Exchange</label>
-            <select className="form-control" id="exchanges">
+            <select
+              className="form-control"
+              id="exchanges"
+              onChange={event => this.handleFilterChange(event.target.value)}
+            >
               <option value="">= Filter by Exchange =</option>
               {this.state.exchanges.map(exchange => (
                 <option key={exchange.code} value={exchange.code}>
