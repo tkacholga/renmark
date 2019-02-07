@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './company-list.css';
 
 class CompanyList extends React.Component {
@@ -8,13 +9,17 @@ class CompanyList extends React.Component {
         <h3 className="title text-center">Our Clients</h3>
 
         <div className="row">
-          {this.props.data.map(company => (
-            <div className="item col-2" key={company.id}>
+          {this.props.data.map((company, index) => (
+            <Link
+              to={`/companies/${company.id}`}
+              className="item col-2"
+              key={index}
+            >
               <div className="company-logo">
                 <img src={company.logo} alt={company.name} />
               </div>
               {company.name}
-            </div>
+            </Link>
           ))}
         </div>
       </React.Fragment>
