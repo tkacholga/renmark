@@ -7,17 +7,15 @@ class CompanyList extends React.Component {
       <React.Fragment>
         <h3 className="title text-center">Our Clients</h3>
 
-        <div className="container">
-          <div className="row">
-            {this.props.data.map(company => (
-              <div className="item col-2" key={company.id}>
-                <div className="company-logo">
-                  <img src={company.logo} alt={company.name} />
-                </div>
-                {company.name}
+        <div className="row">
+          {this.props.data.map(company => (
+            <div className="item col-2" key={company.id}>
+              <div className="company-logo">
+                <img src={company.logo} alt={company.name} />
               </div>
-            ))}
-          </div>
+              {company.name}
+            </div>
+          ))}
         </div>
       </React.Fragment>
     );

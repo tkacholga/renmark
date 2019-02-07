@@ -9,11 +9,12 @@ class HomeComponent extends React.Component {
 
     this.state = {
       data: [],
-      selectedPage: 1
+      selectedPage: 1,
+      exchanges: []
     };
   }
 
-  loadCommentsFromServer() {
+  fetchCompanies() {
     axios
       .get('https://api.renmark.ir/companies', {
         params: { page: this.state.selectedPage }
@@ -35,42 +36,74 @@ class HomeComponent extends React.Component {
       });
   }
 
+  fetchExchanges = () => {
+    return axios
+      .get('https://api.renmark.ir/exchanges')
+      .then(response => {
+        const responseData = response.data ? response.data.data : [];
+
+        this.setState({
+          exchanges: responseData
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   componentDidMount() {
-    this.loadCommentsFromServer();
+    this.fetchExchanges().then(() => {
+      this.fetchCompanies();
+    });
   }
 
   handlePageClick = data => {
     const selectedPage = data.selected + 1;
 
     this.setState({ selectedPage }, () => {
-      this.loadCommentsFromServer();
+      this.fetchCompanies();
     });
   };
 
   render() {
     return (
-      <div className="commentBox">
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="form-group col-3">
+            <label htmlFor="exampleFormControlSelect1">Choose Exchange</label>
+            <select className="form-control" id="exchanges">
+              <option value="">= Filter by Exchange =</option>
+              {this.state.exchanges.map(exchange => (
+                <option key={exchange.code} value={exchange.code}>
+                  {exchange.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
         <CompanyList data={this.state.data} />
-        <ReactPaginate
-          previousLabel={'previous'}
-          nextLabel={'next'}
-          breakLabel={'...'}
-          pageCount={this.state.pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={this.state.pageRangeDisplayed}
-          onPageChange={this.handlePageClick}
-          containerClassName={'pagination'}
-          subContainerClassName={'pages pagination'}
-          activeClassName={'active'}
-          pageClassName={'page-item'}
-          pageLinkClassName={'page-link'}
-          previousClassName={'page-item'}
-          previousLinkClassName={'page-link'}
-          nextClassName={'page-item'}
-          nextLinkClassName={'page-link'}
-          breakClassName={'page-item'}
-          breakLinkClassName={'page-link'}
-        />
+        <div className="row justify-content-center">
+          <ReactPaginate
+            previousLabel={'previous'}
+            nextLabel={'next'}
+            breakLabel={'...'}
+            pageCount={this.state.pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={this.state.pageRangeDisplayed}
+            onPageChange={this.handlePageClick}
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'}
+            pageClassName={'page-item'}
+            pageLinkClassName={'page-link'}
+            previousClassName={'page-item'}
+            previousLinkClassName={'page-link'}
+            nextClassName={'page-item'}
+            nextLinkClassName={'page-link'}
+            breakClassName={'page-item'}
+            breakLinkClassName={'page-link'}
+          />
+        </div>
       </div>
     );
   }
