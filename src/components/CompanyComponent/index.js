@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class CompanyComponent extends React.Component {
   constructor(props) {
@@ -44,6 +45,9 @@ class CompanyComponent extends React.Component {
     return (
       <div className="container">
         <h1>{name}</h1>
+        <Link className="btn btn-info btn-sm mb-2" to="/">
+          Go Back
+        </Link>
         <div className="row">
           <div className="col-12">
             <p>

@@ -83,7 +83,7 @@ class HomeComponent extends React.Component {
       <div className="container">
         <div className="row justify-content-center">
           <div className="form-group col-5">
-            <label htmlFor="exampleFormControlSelect1">Choose Exchange</label>
+            <label htmlFor="exchangeSelect">Choose Exchange</label>
             <select
               className="form-control"
               id="exchanges"

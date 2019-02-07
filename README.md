@@ -37,32 +37,22 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Steps And Processes For The Project
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Created an app with [Create React App](https://github.com/facebook/create-react-app).
+2. Made a repository on [gitHub](https://github.com/tkacholga/renmark).
+3. Installed [react-paginate](https://www.npmjs.com/package/react-paginate) - a ReactJS component to render a pagination.
+4. Made a structure of the app. Created in a `src` folder `component` folder with two components `CompanyList` and `HomeComponent`.
+5. In `index.html` file added a <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"> to use bootstrap in the project for styles.
+6. Added pagination to `HomeComponent` with test data to check if it works properly, and displayed in `CompanyList` component.
+7. Modified `components` folder structure, added `css` file for styles.
+8. Installed [axios](https://github.com/axios/axios) for fetching data from API.
+9. Got data from API, adde logic to `HomeComponent` and `CompanyList`.
+10. Created dropdown to make filter of exchanges, and added logic to `HomeComponent`.
+11. Installed [react-router-dom](https://facebook.github.io/create-react-app/docs/adding-a-router) and modified `App.js` file.
+12. Created `CompanyComponent` in `components` folder to show information about the company, added `Link` to the images in `CompanyList`.
+13. Added logic to `CompanyComponent` to fetch data from API and display it.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### You Can Check Out the App on Netlify
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Here's the link to the app: https://renmark-app.netlify.com/
