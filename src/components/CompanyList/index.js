@@ -9,8 +9,11 @@ class CompanyList extends React.Component {
 
         <div className="container">
           <div className="row">
-            {this.props.data.map((company, index) => (
-              <div className="item col-2" key={index}>
+            {this.props.data.map(company => (
+              <div className="item col-2" key={company.id}>
+                <div className="company-logo">
+                  <img src={company.logo} alt={company.name} />
+                </div>
                 {company.name}
               </div>
             ))}

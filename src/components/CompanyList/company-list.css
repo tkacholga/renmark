@@ -11,6 +11,6 @@
   flex-wrap: wrap;
 }
 
-.item {
-  width: 16.77%;
+.company-logo {
+  min-height: 103px;
 }

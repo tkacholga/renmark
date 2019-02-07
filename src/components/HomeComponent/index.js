@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import CompanyList from '../CompanyList';
+import axios from 'axios';
 
 class HomeComponent extends React.Component {
   constructor(props) {
@@ -8,26 +9,30 @@ class HomeComponent extends React.Component {
 
     this.state = {
       data: [],
-      offset: 0,
-      pageCount: 0,
-      pageRangeDisplayed: 50
+      selectedPage: 1
     };
   }
 
   loadCommentsFromServer() {
-    const testData = [];
-    for (let i = 1; i <= 100; i++) {
-      testData.push({ name: `Company name ${i}` });
-    }
-    const pageCount = Math.ceil(
-      testData.length / this.state.pageRangeDisplayed
-    );
-    const data = testData.splice(
-      this.state.offset,
-      this.state.pageRangeDisplayed
-    );
+    axios
+      .get('https://api.renmark.ir/companies', {
+        params: { page: this.state.selectedPage }
+      })
+      .then(response => {
+        const responseData = response.data ? response.data.data : [];
+        const paginationData = response.data
+          ? response.data.meta.pagination
+          : {};
 
-    this.setState({ data, pageCount });
+        this.setState({
+          data: responseData,
+          pageCount: paginationData.total_pages,
+          pageRangeDisplayed: paginationData.per_page
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   componentDidMount() {
@@ -35,10 +40,9 @@ class HomeComponent extends React.Component {
   }
 
   handlePageClick = data => {
-    let selected = data.selected;
-    let offset = Math.ceil(selected * this.state.pageRangeDisplayed);
+    const selectedPage = data.selected + 1;
 
-    this.setState({ offset: offset }, () => {
+    this.setState({ selectedPage }, () => {
       this.loadCommentsFromServer();
     });
   };
