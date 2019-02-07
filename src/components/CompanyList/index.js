@@ -8,7 +8,7 @@ class CompanyList extends React.Component {
       <React.Fragment>
         <h3 className="title text-center">Our Clients</h3>
 
-        <div className="row">
+        <div className="row mb-4">
           {this.props.data.map((company, index) => (
             <Link
               to={`/companies/${company.id}`}
