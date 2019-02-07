@@ -10,7 +10,7 @@ class HomeComponent extends React.Component {
       data: [],
       offset: 0,
       pageCount: 0,
-      pageRangeDisplayed: 5
+      pageRangeDisplayed: 50
     };
   }
 

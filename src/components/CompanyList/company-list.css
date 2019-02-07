@@ -1,0 +1,16 @@
+.title {
+  padding-top: 75px;
+  padding-bottom: 20px;
+  color: #0b3e7e;
+  font-weight: 300;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 16.77%;
+}
